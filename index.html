@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2b000b">
+<title>Happy Birthday, My Love ❤️</title>
+
+<!-- Google Fonts Luxury & Aesthetic -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Monsieur+La+Doulaise&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg-dark: #120206;
+  --bg-card: rgba(35, 8, 16, 0.65);
+  --accent-gold: #e5c158;
+  --gold-gradient: linear-gradient(135deg, #fce08f 0%, #d4af37 50%, #aa7c11 100%);
+  --rose-gold: #e8a598;
+  --text-primary: #fff5f2;
+  --text-secondary: #e2c2c6;
+  --border-gold: rgba(212, 175, 55, 0.3);
+  --glass-blur: blur(20px);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--text-primary);
+  background: var(--bg-dark);
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(138, 21, 56, 0.25) 0%, transparent 40%),
+    radial-gradient(circle at 85% 75%, rgba(184, 134, 11, 0.15) 0%, transparent 40%);
+  background-attachment: fixed;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  overflow-x: hidden;
+  line-height: 1.8;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+/* Typography Classes */
+.font-cinzel { font-family: 'Cinzel', serif; }
+.font-serif { font-family: 'Playfair Display', serif; }
+.font-script { 
+  font-family: 'Monsieur La Doulaise', cursive; 
+  font-weight: 400;
+}
+
+/* Luxury Gold Text Gradient */
+.gold-text {
+  background: linear-gradient(
+    135deg,
+    #fce08f 0%,
+    #d4af37 50%,
+    #aa7c11 100%
+  );
+
+  background-clip: text;
+  -webkit-background-clip: text;
+
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+
+  display: inline-block;
+}
+/* INTRO OVERLAY */
+#intro {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  text-align: center;
+  background: radial-gradient(circle at center, #3a0818 0%, #120206 100%);
+  transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), visibility 1s;
+}
+
+#intro.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.intro-card {
+  max-width: 480px;
+  width: 100%;
+  padding: 40px 28px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border-gold);
+  border-radius: 24px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.intro-card h1 {
+  font-size: clamp(48px, 12vw, 72px);
+  margin: 10px 0;
+  line-height: 1;
+}
+
+.intro-card p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 28px;
+  font-weight: 300;
+}
+
+/* BUTTONS */
+.primary-btn {
+  display: inline-block;
+  padding: 14px 36px;
+  border-radius: 50px;
+  background: var(--gold-gradient);
+  color: #1a0309;
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  box-shadow: 0 10px 25px rgba(212, 175, 55, 0.25);
+  transition: all 0.4s ease;
+}
+
+.primary-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(212, 175, 55, 0.4);
+}
+
+.primary-btn:active {
+  transform: translateY(-1px);
+}
+
+/* NAVIGATION */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 8%;
+  background: rgba(18, 2, 6, 0.75);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.brand {
+  font-size: 0.9rem;
+  letter-spacing: 3px;
+  font-weight: 600;
+}
+
+.music-btn {
+  border: 1px solid var(--border-gold);
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--accent-gold);
+  padding: 8px 18px;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.music-btn:hover {
+  background: rgba(212, 175, 55, 0.15);
+}
+
+/* SECTIONS */
+section {
+  padding: 100px 24px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.section-title h2 {
+  font-size: clamp(40px, 8vw, 64px);
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+
+.section-title p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  font-weight: 300;
+}
+
+/* HERO */
+.hero {
+  min-height: 85vh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 0.75rem;
+  color: var(--accent-gold);
+  margin-bottom: 12px;
+}
+
+.hero h1 {
+  font-size: clamp(60px, 14vw, 110px);
+  line-height: 1;
+  margin: 10px 0 20px;
+}
+
+.hero h2 {
+  font-size: clamp(20px, 4vw, 28px);
+  font-weight: 400;
+  color: var(--rose-gold);
+  margin-bottom: 20px;
+}
+
+.hero p {
+  color: var(--text-secondary);
+  max-width: 540px;
+  margin: 0 auto 36px;
+  font-weight: 300;
+}
+
+/* LETTER */
+.love-note {
+  max-width: 760px;
+  margin: auto;
+  padding: clamp(30px, 6vw, 60px);
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border-gold);
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.love-note p {
+  margin-bottom: 20px;
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  font-weight: 300;
+}
+
+.signature {
+  font-size: 42px;
+  text-align: right;
+  margin-top: 35px;
+}
+
+/* GALLERY */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.polaroid {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  padding: 16px 16px 24px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+
+.polaroid:hover {
+  transform: translateY(-8px);
+  border-color: var(--border-gold);
+  box-shadow: 0 20px 40px rgba(212, 175, 55, 0.15);
+}
+
+.polaroid img {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  border-radius: 10px;
+  filter: brightness(0.95) contrast(1.05);
+}
+
+.polaroid p {
+  text-align: center;
+  font-size: 32px;
+  color: var(--accent-gold);
+  margin-top: 16px;
+}
+
+/* JOKES / REASONS */
+.jokes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.joke {
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 30px 24px;
+  transition: border-color 0.3s;
+}
+
+.joke:hover {
+  border-color: var(--border-gold);
+}
+
+.joke span {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.joke h3 {
+  color: var(--accent-gold);
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.joke p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+
+/* SURPRISE SECTION */
+.surprise {
+  text-align: center;
+}
+
+#surprise-message {
+  display: none;
+  max-width: 680px;
+  margin: 40px auto 0;
+  padding: 40px;
+  border: 1px solid var(--border-gold);
+  border-radius: 20px;
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+}
+
+#surprise-message.show {
+  display: block;
+  animation: fadeIn 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* LIGHTBOX */
+#lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  padding: 20px;
+  background: rgba(10, 1, 4, 0.92);
+  backdrop-filter: blur(15px);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#lightbox.open { display: flex; }
+
+#lightbox img {
+  max-width: 90vw;
+  max-height: 75vh;
+  object-fit: contain;
+  border-radius: 12px;
+  border: 1px solid var(--border-gold);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+}
+
+#lightbox p {
+  color: var(--accent-gold);
+  margin-top: 16px;
+  font-size: 2rem;
+}
+
+#lightbox button {
+  margin-top: 20px;
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-gold);
+  border-radius: 30px;
+  padding: 8px 24px;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ANIMATED PETALS / LIGHT PARTICLES */
+#petals {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  overflow: hidden;
+}
+
+.petal {
+  position: absolute;
+  top: -20px;
+  animation: fall linear forwards;
+  opacity: 0.6;
+  filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.3));
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(105vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 60px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(10, 1, 4, 0.5);
+}
+
+footer .script {
+  font-size: 36px;
+}
+
+footer p {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  margin-top: 8px;
+  font-weight: 300;
+}
+
+@media(max-width: 768px) {
+  section { padding: 60px 18px; }
+  .intro-card { padding: 30px 20px; }
+  nav { padding: 15px 5%; }
+  .gallery { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="petals" aria-hidden="true"></div>
+
+<!-- INTRO COVER -->
+<div id="intro">
+  <div class="intro-card">
+    <div style="font-size: 32px; margin-bottom: 12px;">✨</div>
+    <div class="eyebrow">A Birthday Dedication</div>
+    <h1 class="font-script gold-text">Happy Birthday</h1>
+    <p>
+      Untuk perempuan paling istimewa.<br>
+      Sebuah halaman kecil yang dibuat khusus untuk merayakan kehadiranmu.
+    </p>
+    <button class="primary-btn" id="open-btn">Buka Hadiah 💌</button>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="brand font-cinzel gold-text">OUR STORY</div>
+  <button class="music-btn font-cinzel" id="music-btn" aria-label="Putar Musik">
+    ♫ PUTAR MUSIK
+  </button>
+</nav>
+
+<main>
+  <!-- HERO SECTION -->
+  <section class="hero" id="home">
+    <div>
+      <div class="eyebrow">A Special Day For Someone Special</div>
+      <h1 class="font-script gold-text">Happy Birthday,<br>Sayangku</h1>
+      <h2 class="font-serif">Untuk kamu, perempuan favorit aku. 🫶</h2>
+      <p>
+        Hari ini dunia merayakan hari lahirmu, dan aku merayakan hal terbaik dalam hidupku: kesempatan untuk mengenal, mencintai, dan tumbuh bersamamu.
+      </p>
+      <button class="primary-btn" onclick="goTo('letter')">Baca Surat Kecilku 💌</button>
+    </div>
+  </section>
+
+  <!-- LETTER SECTION -->
+  <section id="letter">
+    <div class="section-title">
+      <h2 class="font-script gold-text">A Letter For You</h2>
+      <p class="font-cinzel">Ungkapan Hati Sederhana</p>
+    </div>
+
+    <article class="love-note">
+      <p>Haii, perempuan cantik yang hari ini sedang ulang tahun. ❤️</p>
+      <p>
+        Selamat bertambah usia, sayangku. Semoga di lembaran baru ini kamu senantiasa dilimpahi kesehatan, kedamaian hati, dan kebahagiaan yang melimpah. Semoga setiap langkahmu dimudahkan dan hal-hal baik selalu menemukan jalan menuju kamu.
+      </p>
+      <p>
+        Terima kasih sudah hadir dan melengkapi hari-hariku. Terima kasih atas tawa renyahmu, cerita-cerita randommu, serta perhatian tulus yang membuat hal sederhana terasa begitu istimewa.
+      </p>
+      <p>
+        Aku tahu aku jauh dari kata sempurna. Kadang membuatmu kesal atau bingung merangkai kata. Namun, aku ingin kamu tahu: aku akan terus belajar menjadi pribadi yang lebih baik untuk menjaga hubungan ini.
+      </p>
+      <p>
+        Saat kamu merasa lelah, ingatlah bahwa kamu tak harus selalu kuat sendirian. Di kala bersedih, perasaanmu selalu berharga untuk didengar. Dan ketika kamu bahagia, biarkan aku menjadi salah satu alasan di balik senyuman itu.
+      </p>
+      <p>
+        Sekali lagi, selamat ulang tahun. Terima kasih telah menjadi dirimu yang luar biasa.
+      </p>
+      <p style="color: var(--accent-gold); font-weight: 500;">
+        I love you, today, tomorrow, and always. ❤️✨
+      </p>
+
+      <div class="signature font-script gold-text">With love, aku ❤️</div>
+    </article>
+  </section>
+
+  <!-- GALLERY SECTION -->
+  <section id="gallery">
+    <div class="section-title">
+      <h2 class="font-script gold-text">Our Silly Memories</h2>
+      <p class="font-cinzel">Momen Favorit Kita</p>
+    </div>
+
+    <div class="gallery">
+      <div class="polaroid" onclick="showPhoto('gambar/5.jpeg','My Favorite Person ❤️')">
+        <img src="gambar/5.jpeg" alt="Foto 1" loading="lazy">
+        <p class="font-script">My favorite person ❤️</p>
+      </div>
+
+      <div class="polaroid" onclick="showPhoto('gambar/4.jpeg','Si Bokem Kesayangan 🤏')">
+        <img src="gambar/4.jpeg" alt="Foto 2" loading="lazy">
+        <p class="font-script">bokemnya aku 🤏</p>
+      </div>
+
+      <div class="polaroid" onclick="showPhoto('gambar/2.jpeg','Senyum Favoritku 💗')">
+        <img src="gambar/2.jpeg" alt="Foto 3" loading="lazy">
+        <p class="font-script">Senyum yang aku suka 💗</p>
+      </div>
+
+      <div class="polaroid" onclick="showPhoto('gambar/7.jpeg','Duo Random 🤣')">
+        <img src="gambar/7.jpeg" alt="Foto 4" loading="lazy">
+        <p class="font-script">Duo paling random 🤣</p>
+      </div>
+
+      <div class="polaroid" onclick="showPhoto('gambar/8.jpeg','Kenangan Indah ✨')">
+        <img src="gambar/8.jpeg" alt="Foto 5" loading="lazy">
+        <p class="font-script">Little moments ✨</p>
+      </div>
+
+      <div class="polaroid" onclick="showPhoto('gambar/6.jpeg','Selalu Bersamamu 🌻')">
+        <img src="gambar/6.jpeg" alt="Foto 6" loading="lazy">
+        <p class="font-script">My person 🌻</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- REASONS / HUMOR -->
+  <section id="laughs">
+    <div class="section-title">
+      <h2 class="font-script gold-text">Reasons I Love You</h2>
+      <p class="font-cinzel">Alasan Kamu Begitu Istimewa</p>
+    </div>
+
+    <div class="jokes">
+      <article class="joke">
+        <span>✨</span>
+        <h3 class="font-cinzel">Kamu Selalu Spesial</h3>
+        <p>Kamu selalu berhasil membuat hari yang biasa terasa penuh warna lewat cerita manis dan spontanmu.</p>
+      </article>
+
+      <article class="joke">
+        <span>🤏</span>
+        <h3 class="font-cinzel">Gemas & Menggemaskan</h3>
+        <p>Bahkan saat sedang ngambek pun kamu tetap menggemaskan. Bikin bingung antara mau bujuk atau senyum-senyum sendiri.</p>
+      </article>
+
+      <article class="joke">
+        <span>🫶</span>
+        <h3 class="font-cinzel">Tulus Menjadi Diri Sendiri</h3>
+        <p>Tak perlu berpura-pura sempurna. Aku mencintai caramu menjadi dirimu sendiri apa adanya.</p>
+      </article>
+
+      <article class="joke">
+        <span>🌻</span>
+        <h3 class="font-cinzel">Rumah Terbaikku</h3>
+        <p>Bersamamu terasa tenang. Tempat paling nyaman untuk pulang dan berbagi semua kisah hidup.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- SURPRISE SECTION -->
+  <section class="surprise" id="surprise">
+    <div class="section-title">
+      <h2 class="font-script gold-text">One Last Surprise</h2>
+      <p class="font-cinzel">Sebuah Pesan Penutup</p>
+    </div>
+
+    <button class="primary-btn" id="surprise-btn">Buka Kejutan Terakhir 💝</button>
+
+    <div id="surprise-message" aria-live="polite">
+      <h2 class="font-script gold-text" style="font-size: 48px; margin-bottom: 12px;">For You, My Love</h2>
+      <p>
+        Selamat ulang tahun sekali lagi, sayangku. Semoga hari ini dan hari-hari mendatang senantiasa dipenuhi tawa hangat, kebahagiaan sejati, dan cinta yang tak pernah usai.
+      </p>
+      <br>
+      <p style="color: var(--accent-gold); font-weight: 600;">
+        Terima kasih telah mewarnai takdirku. I love you endlessly. ❤️
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="font-script gold-text script">Forever & Always</div>
+  <p class="font-cinzel">Made with endless love, just for you.</p>
+</footer>
+
+<!-- LIGHTBOX MODAL -->
+<div id="lightbox" role="dialog" aria-modal="true">
+  <img id="lightbox-img" src="" alt="Foto Diperbesar">
+  <p id="lightbox-caption" class="font-script"></p>
+  <button id="close-lightbox" class="font-cinzel">TUTUP ✕</button>
+</div>
+
+<audio id="bg-music" src="Stephen Sanchez - Until I Found You (Official Video).mp3" loop preload="none"></audio>
+
+<script>
+const intro = document.getElementById('intro');
+const music = document.getElementById('bg-music');
+const musicBtn = document.getElementById('music-btn');
+let petalsStarted = false;
+
+document.getElementById('open-btn').addEventListener('click', async () => {
+  intro.classList.add('hidden');
+  startPetals();
+
+  try {
+    await music.play();
+    musicBtn.textContent = 'Ⅱ JEDA MUSIK';
+  } catch (err) {
+    musicBtn.textContent = '♫ PUTAR MUSIK';
+  }
+
+  document.getElementById('home').scrollIntoView({behavior:'smooth'});
+});
+
+musicBtn.addEventListener('click', async () => {
+  if (music.paused) {
+    try {
+      await music.play();
+      musicBtn.textContent = 'Ⅱ JEDA MUSIK';
+    } catch (err) {
+      musicBtn.textContent = 'GAGAL DIPUTAR';
+    }
+  } else {
+    music.pause();
+    musicBtn.textContent = '♫ PUTAR MUSIK';
+  }
+});
+
+function goTo(id) {
+  document.getElementById(id).scrollIntoView({behavior:'smooth'});
+}
+
+function showPhoto(src, caption) {
+  const box = document.getElementById('lightbox');
+  const img = document.getElementById('lightbox-img');
+  img.src = src;
+  document.getElementById('lightbox-caption').textContent = caption;
+  box.classList.add('open');
+}
+
+function closePhoto() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.getElementById('lightbox-img').src = '';
+}
+
+document.getElementById('close-lightbox').addEventListener('click', closePhoto);
+document.getElementById('lightbox').addEventListener('click', (e) => {
+  if (e.target.id === 'lightbox') closePhoto();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closePhoto();
+});
+
+document.getElementById('surprise-btn').addEventListener('click', () => {
+  const message = document.getElementById('surprise-message');
+  const isOpen = message.classList.toggle('show');
+  document.getElementById('surprise-btn').textContent = 
+    isOpen ? 'KEJUTAN TERBUKA ❤️' : 'BUKA KEJUTAN TERAKHIR 💝';
+
+  if (isOpen) {
+    message.scrollIntoView({behavior:'smooth', block:'center'});
+    startPetals();
+  }
+});
+
+function startPetals() {
+  if (petalsStarted) return;
+  petalsStarted = true;
+
+  const container = document.getElementById('petals');
+  const symbols = ['✨', '🌸', '❤️', '🌹'];
+  let count = 0;
+
+  const interval = setInterval(() => {
+    if (count >= 30) {
+      clearInterval(interval);
+      return;
+    }
+
+    const petal = document.createElement('span');
+    petal.className = 'petal';
+    petal.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+    petal.style.left = Math.random() * 100 + 'vw';
+    petal.style.animationDuration = (5 + Math.random() * 5) + 's';
+    petal.style.fontSize = (12 + Math.random() * 10) + 'px';
+    container.appendChild(petal);
+
+    petal.addEventListener('animationend', () => petal.remove());
+    count++;
+  }, 400);
+}
+</script>
+</body>
+</html>
