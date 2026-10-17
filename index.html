@@ -3,25 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#2b000b">
+<meta name="theme-color" content="#120206">
 <title>Happy Birthday, My Love ❤️</title>
 
 <!-- Google Fonts Luxury & Aesthetic -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Monsieur+La+Doulaise&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:ital,wght@0,400;0,600;0,700;1,400&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Canvas Confetti Library for Luxury FX -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <style>
 :root {
-  --bg-dark: #120206;
-  --bg-card: rgba(35, 8, 16, 0.65);
-  --accent-gold: #e5c158;
-  --gold-gradient: linear-gradient(135deg, #fce08f 0%, #d4af37 50%, #aa7c11 100%);
-  --rose-gold: #e8a598;
-  --text-primary: #fff5f2;
+  --bg-dark: #0a0104;
+  --bg-card: rgba(28, 6, 13, 0.65);
+  --accent-gold: #f3cf7a;
+  --gold-gradient: linear-gradient(135deg, #ffe8a3 0%, #d4af37 45%, #8a640f 100%);
+  --gold-border: linear-gradient(135deg, rgba(255, 232, 163, 0.6), rgba(212, 175, 55, 0.2), rgba(138, 100, 15, 0.4));
+  --rose-gold: #f4b2a6;
+  --text-primary: #fff8f6;
   --text-secondary: #e2c2c6;
-  --border-gold: rgba(212, 175, 55, 0.3);
-  --glass-blur: blur(20px);
+  --border-gold: rgba(212, 175, 55, 0.25);
+  --glass-blur: blur(24px);
+  --shadow-luxe: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(212, 175, 55, 0.1);
 }
 
 * {
@@ -38,8 +43,9 @@ body {
   color: var(--text-primary);
   background: var(--bg-dark);
   background-image: 
-    radial-gradient(circle at 15% 15%, rgba(138, 21, 56, 0.25) 0%, transparent 40%),
-    radial-gradient(circle at 85% 75%, rgba(184, 134, 11, 0.15) 0%, transparent 40%);
+    radial-gradient(circle at 10% 20%, rgba(138, 21, 56, 0.2) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(184, 134, 11, 0.12) 0%, transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(40, 2, 12, 0.8) 0%, #0a0104 100%);
   background-attachment: fixed;
   font-family: 'Plus Jakarta Sans', sans-serif;
   overflow-x: hidden;
@@ -57,38 +63,38 @@ button {
 .font-cinzel { font-family: 'Cinzel', serif; }
 .font-serif { font-family: 'Playfair Display', serif; }
 .font-script { 
-  font-family: 'Monsieur La Doulaise', cursive; 
+  font-family: 'Great Vibes', cursive; 
   font-weight: 400;
+  letter-spacing: 1px;
 }
 
 /* Luxury Gold Text Gradient */
 .gold-text {
-  background: linear-gradient(
-    135deg,
-    #fce08f 0%,
-    #d4af37 50%,
-    #aa7c11 100%
-  );
-
+  background: var(--gold-gradient);
   background-clip: text;
   -webkit-background-clip: text;
-
   color: transparent;
   -webkit-text-fill-color: transparent;
-
   display: inline-block;
+  filter: drop-shadow(0 2px 8px rgba(212, 175, 55, 0.2));
 }
+
+/* Glow Effect */
+.gold-glow {
+  text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+}
+
 /* INTRO OVERLAY */
 #intro {
   position: fixed;
   inset: 0;
-  z-index: 50;
+  z-index: 100;
   display: grid;
   place-items: center;
   padding: 24px;
   text-align: center;
-  background: radial-gradient(circle at center, #3a0818 0%, #120206 100%);
-  transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), visibility 1s;
+  background: radial-gradient(circle at center, #2e0513 0%, #0a0104 100%);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 1.2s;
 }
 
 #intro.hidden {
@@ -98,49 +104,72 @@ button {
 }
 
 .intro-card {
-  max-width: 480px;
+  max-width: 500px;
   width: 100%;
-  padding: 40px 28px;
-  background: rgba(255, 255, 255, 0.03);
+  padding: 50px 32px;
+  background: var(--bg-card);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--border-gold);
-  border-radius: 24px;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border: 1px solid transparent;
+  border-image: var(--gold-border) 1;
+  border-radius: 28px;
+  box-shadow: var(--shadow-luxe);
+  position: relative;
+  overflow: hidden;
+}
+
+.intro-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.03), transparent);
+  transform: rotate(45deg);
+  animation: shine 6s infinite;
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) rotate(45deg); }
 }
 
 .intro-card h1 {
-  font-size: clamp(48px, 12vw, 72px);
-  margin: 10px 0;
+  font-size: clamp(52px, 12vw, 76px);
+  margin: 12px 0;
   line-height: 1;
 }
 
 .intro-card p {
   color: var(--text-secondary);
   font-size: 0.95rem;
-  margin-bottom: 28px;
+  margin-bottom: 32px;
   font-weight: 300;
+  letter-spacing: 0.5px;
 }
 
 /* BUTTONS */
 .primary-btn {
+  position: relative;
   display: inline-block;
-  padding: 14px 36px;
+  padding: 16px 42px;
   border-radius: 50px;
   background: var(--gold-gradient);
-  color: #1a0309;
+  color: #0f0205;
   font-family: 'Cinzel', serif;
   font-weight: 700;
   font-size: 0.85rem;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
   text-transform: uppercase;
-  box-shadow: 0 10px 25px rgba(212, 175, 55, 0.25);
-  transition: all 0.4s ease;
+  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: hidden;
 }
 
 .primary-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 15px 35px rgba(212, 175, 55, 0.4);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 18px 40px rgba(212, 175, 55, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
 .primary-btn:active {
@@ -151,66 +180,70 @@ button {
 nav {
   position: sticky;
   top: 0;
-  z-index: 20;
+  z-index: 50;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 8%;
-  background: rgba(18, 2, 6, 0.75);
+  padding: 20px 8%;
+  background: rgba(10, 1, 4, 0.8);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   border-bottom: 1px solid rgba(212, 175, 55, 0.15);
 }
 
 .brand {
-  font-size: 0.9rem;
-  letter-spacing: 3px;
-  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 4px;
+  font-weight: 700;
 }
 
 .music-btn {
   border: 1px solid var(--border-gold);
   border-radius: 30px;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.03);
   color: var(--accent-gold);
-  padding: 8px 18px;
+  padding: 10px 22px;
   font-size: 0.75rem;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
 }
 
 .music-btn:hover {
   background: rgba(212, 175, 55, 0.15);
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
 }
 
 /* SECTIONS */
 section {
-  padding: 100px 24px;
+  padding: 120px 24px;
   max-width: 1100px;
   margin: auto;
 }
 
 .section-title {
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 60px;
 }
 
 .section-title h2 {
-  font-size: clamp(40px, 8vw, 64px);
+  font-size: clamp(48px, 8vw, 72px);
   line-height: 1.1;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .section-title p {
   color: var(--text-secondary);
   font-size: 0.95rem;
-  letter-spacing: 1px;
-  font-weight: 300;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 400;
 }
 
 /* HERO */
 .hero {
-  min-height: 85vh;
+  min-height: 90vh;
   display: grid;
   place-items: center;
   text-align: center;
@@ -219,137 +252,231 @@ section {
 
 .eyebrow {
   text-transform: uppercase;
-  letter-spacing: 4px;
-  font-size: 0.75rem;
+  letter-spacing: 5px;
+  font-size: 0.8rem;
   color: var(--accent-gold);
-  margin-bottom: 12px;
+  margin-bottom: 16px;
+  font-weight: 600;
 }
 
 .hero h1 {
-  font-size: clamp(60px, 14vw, 110px);
-  line-height: 1;
-  margin: 10px 0 20px;
+  font-size: clamp(64px, 15vw, 120px);
+  line-height: 0.95;
+  margin: 10px 0 24px;
 }
 
 .hero h2 {
-  font-size: clamp(20px, 4vw, 28px);
+  font-size: clamp(22px, 4vw, 32px);
   font-weight: 400;
   color: var(--rose-gold);
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  font-style: italic;
 }
 
 .hero p {
   color: var(--text-secondary);
-  max-width: 540px;
-  margin: 0 auto 36px;
+  max-width: 580px;
+  margin: 0 auto 40px;
   font-weight: 300;
+  font-size: 1.05rem;
 }
 
 /* LETTER */
 .love-note {
-  max-width: 760px;
+  max-width: 800px;
   margin: auto;
-  padding: clamp(30px, 6vw, 60px);
+  padding: clamp(36px, 6vw, 70px);
   background: var(--bg-card);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   border: 1px solid var(--border-gold);
-  border-radius: 16px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  border-radius: 24px;
+  box-shadow: var(--shadow-luxe);
   position: relative;
 }
 
+.love-note::after {
+  content: '“';
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-family: 'Playfair Display', serif;
+  font-size: 120px;
+  color: rgba(212, 175, 55, 0.08);
+  line-height: 1;
+}
+
 .love-note p {
-  margin-bottom: 20px;
+  margin-bottom: 22px;
   color: var(--text-secondary);
-  font-size: 1.05rem;
+  font-size: 1.08rem;
   font-weight: 300;
 }
 
 .signature {
-  font-size: 42px;
+  font-size: 52px;
   text-align: right;
-  margin-top: 35px;
+  margin-top: 40px;
 }
 
 /* GALLERY */
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 30px;
+  gap: 32px;
 }
 
 .polaroid {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
-  padding: 16px 16px 24px;
-  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(12px);
+  padding: 18px 18px 28px;
+  border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-  transition: all 0.4s ease;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
 }
 
 .polaroid:hover {
-  transform: translateY(-8px);
-  border-color: var(--border-gold);
-  box-shadow: 0 20px 40px rgba(212, 175, 55, 0.15);
+  transform: translateY(-10px) scale(1.02);
+  border-color: var(--accent-gold);
+  box-shadow: 0 25px 50px rgba(212, 175, 55, 0.2);
 }
 
 .polaroid img {
   width: 100%;
   aspect-ratio: 4/5;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 12px;
   filter: brightness(0.95) contrast(1.05);
+  transition: filter 0.3s;
+}
+
+.polaroid:hover img {
+  filter: brightness(1.05) contrast(1.08);
 }
 
 .polaroid p {
   text-align: center;
-  font-size: 32px;
+  font-size: 36px;
   color: var(--accent-gold);
-  margin-top: 16px;
+  margin-top: 18px;
 }
 
-/* JOKES / REASONS */
-.jokes {
+/* PUTRI SPECIAL SECTION */
+.putri-section {
+  background: rgba(20, 3, 9, 0.4);
+  border: 1px solid var(--border-gold);
+  border-radius: 30px;
+  padding: clamp(40px, 6vw, 80px) clamp(20px, 4vw, 50px);
+  backdrop-filter: var(--glass-blur);
+  box-shadow: var(--shadow-luxe);
+}
+
+.putri-heading {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.putri-eyebrow {
+  color: var(--accent-gold);
+  letter-spacing: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.putri-heading h2 {
+  font-size: clamp(32px, 5vw, 48px);
+  margin: 10px 0;
+}
+
+.gold-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+  color: var(--accent-gold);
+}
+
+.gold-divider::before, .gold-divider::after {
+  content: '';
+  width: 60px;
+  height: 1px;
+  background: var(--gold-gradient);
+}
+
+.putri-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 28px;
 }
 
-.joke {
+.putri-card {
   background: var(--bg-card);
   backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 16px;
-  padding: 30px 24px;
-  transition: border-color 0.3s;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 32px 26px;
+  transition: all 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.joke:hover {
+.putri-card:hover {
   border-color: var(--border-gold);
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
 }
 
-.joke span {
-  font-size: 2rem;
-  display: block;
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.card-icon { font-size: 1.8rem; }
+.card-number { font-size: 0.7rem; letter-spacing: 2px; color: var(--accent-gold); opacity: 0.8; }
+
+.putri-card h3 {
+  color: var(--accent-gold);
+  font-size: 1.25rem;
   margin-bottom: 12px;
 }
 
-.joke h3 {
-  color: var(--accent-gold);
-  font-size: 1.1rem;
-  margin-bottom: 10px;
-  letter-spacing: 1px;
+.putri-card p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.7;
 }
 
-.joke p {
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-  font-weight: 300;
+.card-footer {
+  margin-top: 20px;
+  font-size: 0.8rem;
+  color: var(--rose-gold);
+  font-style: italic;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 12px;
 }
+
+.putri-closing {
+  text-align: center;
+  max-width: 720px;
+  margin: 60px auto 0;
+  padding-top: 40px;
+  border-top: 1px solid var(--border-gold);
+}
+
+.closing-flower { font-size: 2.5rem; display: block; margin-bottom: 10px; }
+.closing-label { letter-spacing: 3px; font-size: 0.75rem; color: var(--accent-gold); }
+.putri-closing h3 { font-size: 2rem; margin: 10px 0 20px; }
+.closing-message { color: var(--text-secondary); font-size: 1.05rem; font-weight: 300; }
+.closing-signature { margin-top: 30px; font-family: 'Great Vibes', cursive; font-size: 40px; color: var(--accent-gold); }
 
 /* SURPRISE SECTION */
 .surprise {
@@ -358,25 +485,25 @@ section {
 
 #surprise-message {
   display: none;
-  max-width: 680px;
+  max-width: 720px;
   margin: 40px auto 0;
-  padding: 40px;
+  padding: 50px 36px;
   border: 1px solid var(--border-gold);
-  border-radius: 20px;
+  border-radius: 24px;
   background: var(--bg-card);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+  box-shadow: var(--shadow-luxe);
 }
 
 #surprise-message.show {
   display: block;
-  animation: fadeIn 0.8s ease forwards;
+  animation: fadeInLuxe 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes fadeInLuxe {
+  from { opacity: 0; transform: translateY(30px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 /* LIGHTBOX */
@@ -384,10 +511,10 @@ section {
   display: none;
   position: fixed;
   inset: 0;
-  z-index: 100;
-  padding: 20px;
-  background: rgba(10, 1, 4, 0.92);
-  backdrop-filter: blur(15px);
+  z-index: 200;
+  padding: 24px;
+  background: rgba(5, 0, 2, 0.95);
+  backdrop-filter: blur(20px);
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -397,29 +524,35 @@ section {
 
 #lightbox img {
   max-width: 90vw;
-  max-height: 75vh;
+  max-height: 70vh;
   object-fit: contain;
-  border-radius: 12px;
+  border-radius: 16px;
   border: 1px solid var(--border-gold);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9);
 }
 
 #lightbox p {
   color: var(--accent-gold);
-  margin-top: 16px;
-  font-size: 2rem;
+  margin-top: 20px;
+  font-size: 2.2rem;
 }
 
 #lightbox button {
-  margin-top: 20px;
-  background: transparent;
+  margin-top: 24px;
+  background: rgba(255, 255, 255, 0.05);
   color: var(--text-secondary);
   border: 1px solid var(--border-gold);
   border-radius: 30px;
-  padding: 8px 24px;
+  padding: 10px 30px;
   font-size: 0.8rem;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
   text-transform: uppercase;
+  transition: all 0.3s;
+}
+
+#lightbox button:hover {
+  background: var(--accent-gold);
+  color: #000;
 }
 
 /* ANIMATED PETALS / LIGHT PARTICLES */
@@ -427,7 +560,7 @@ section {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 5;
+  z-index: 10;
   overflow: hidden;
 }
 
@@ -435,8 +568,8 @@ section {
   position: absolute;
   top: -20px;
   animation: fall linear forwards;
-  opacity: 0.6;
-  filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.3));
+  opacity: 0.7;
+  filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.4));
 }
 
 @keyframes fall {
@@ -449,13 +582,13 @@ section {
 /* FOOTER */
 footer {
   text-align: center;
-  padding: 60px 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  background: rgba(10, 1, 4, 0.5);
+  padding: 80px 20px;
+  border-top: 1px solid rgba(212, 175, 55, 0.15);
+  background: rgba(5, 0, 2, 0.8);
 }
 
 footer .script {
-  font-size: 36px;
+  font-size: 42px;
 }
 
 footer p {
@@ -463,13 +596,14 @@ footer p {
   font-size: 0.85rem;
   margin-top: 8px;
   font-weight: 300;
+  letter-spacing: 2px;
 }
 
 @media(max-width: 768px) {
-  section { padding: 60px 18px; }
-  .intro-card { padding: 30px 20px; }
-  nav { padding: 15px 5%; }
-  .gallery { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  section { padding: 80px 18px; }
+  .intro-card { padding: 40px 24px; }
+  nav { padding: 16px 5%; }
+  .gallery { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
 }
 </style>
 </head>
@@ -481,12 +615,12 @@ footer p {
 <!-- INTRO COVER -->
 <div id="intro">
   <div class="intro-card">
-    <div style="font-size: 32px; margin-bottom: 12px;">✨</div>
+    <div style="font-size: 36px; margin-bottom: 12px;">✨</div>
     <div class="eyebrow">A Birthday Dedication</div>
-    <h1 class="font-script gold-text">Happy Birthday</h1>
+    <h1 class="font-script gold-text gold-glow">Happy Birthday</h1>
     <p>
       Untuk perempuan paling istimewa.<br>
-      Sebuah halaman kecil yang dibuat khusus untuk merayakan kehadiranmu.
+      Sebuah halaman khusus yang dirancang penuh cinta untuk merayakan hadirmu.
     </p>
     <button class="primary-btn" id="open-btn">Buka Hadiah 💌</button>
   </div>
@@ -505,7 +639,7 @@ footer p {
   <section class="hero" id="home">
     <div>
       <div class="eyebrow">A Special Day For Someone Special</div>
-      <h1 class="font-script gold-text">Happy Birthday,<br>Sayangku</h1>
+      <h1 class="font-script gold-text gold-glow">Happy Birthday,<br>Sayangku</h1>
       <h2 class="font-serif">Untuk kamu, perempuan favorit aku. 🫶</h2>
       <p>
         Hari ini dunia merayakan hari lahirmu, dan aku merayakan hal terbaik dalam hidupku: kesempatan untuk mengenal, mencintai, dan tumbuh bersamamu.
@@ -522,12 +656,12 @@ footer p {
     </div>
 
     <article class="love-note">
-      <p>Haii, perempuan cantik yang hari ini sedang ulang tahun. ❤️</p>
+      <p>Haii Putri, perempuan cantik yang hari ini sedang ulang tahun. ❤️</p>
       <p>
         Selamat bertambah usia, sayangku. Semoga di lembaran baru ini kamu senantiasa dilimpahi kesehatan, kedamaian hati, dan kebahagiaan yang melimpah. Semoga setiap langkahmu dimudahkan dan hal-hal baik selalu menemukan jalan menuju kamu.
       </p>
       <p>
-        Terima kasih sudah hadir dan melengkapi hari-hariku. Terima kasih atas tawa renyahmu, cerita-cerita randommu, serta perhatian tulus yang membuat hal sederhana terasa begitu istimewa.
+        Terima kasih sudah hadir dan melengkapi hari-hariku. Terima kasih atas tawamu yang begitu candu, cerita-cerita randommu, serta perhatian tulus yang membuat hal sederhana terasa begitu istimewa.
       </p>
       <p>
         Aku tahu aku jauh dari kata sempurna. Kadang membuatmu kesal atau bingung merangkai kata. Namun, aku ingin kamu tahu: aku akan terus belajar menjadi pribadi yang lebih baik untuk menjaga hubungan ini.
@@ -542,7 +676,7 @@ footer p {
         I love you, today, tomorrow, and always. ❤️✨
       </p>
 
-      <div class="signature font-script gold-text">With love, aku ❤️</div>
+      <div class="signature font-script gold-text">dari pengagum nomor satu mu</div>
     </article>
   </section>
 
@@ -586,37 +720,108 @@ footer p {
     </div>
   </section>
 
-  <!-- REASONS / HUMOR -->
-  <section id="laughs">
-    <div class="section-title">
-      <h2 class="font-script gold-text">Reasons I Love You</h2>
-      <p class="font-cinzel">Alasan Kamu Begitu Istimewa</p>
+  <!-- SPECIAL WORDS FOR PUTRI -->
+  <section class="putri-section" id="reasons">
+    <div class="putri-heading">
+      <span class="putri-eyebrow">A LITTLE LETTER FOR YOU</span>
+      <h2 class="font-cinzel gold-text">Untuk Putri, <br />Perempuan Istimewaku</h2>
+      <p style="color: var(--text-secondary); max-width: 600px; margin: 10px auto 0;">
+        Dari sekian banyak hal indah yang aku temukan di dunia,
+        mengenal kamu adalah salah satu hal yang paling aku syukuri.
+      </p>
+      <div class="gold-divider">
+        <span>✦</span>
+      </div>
     </div>
 
-    <div class="jokes">
-      <article class="joke">
-        <span>✨</span>
-        <h3 class="font-cinzel">Kamu Selalu Spesial</h3>
-        <p>Kamu selalu berhasil membuat hari yang biasa terasa penuh warna lewat cerita manis dan spontanmu.</p>
+    <div class="putri-cards">
+      <article class="putri-card">
+        <div class="card-top">
+          <span class="card-icon">✨</span>
+          <span class="card-number">01 / MY FAVORITE PERSON</span>
+        </div>
+        <h3 class="font-cinzel">Kamu, Cerita Favoritku</h3>
+        <p>
+          Putri, kamu tahu nggak? Kadang hal sederhana seperti mendengar
+          ceritamu, melihat senyummu, atau sekadar tahu kalau kamu baik-baik
+          saja sudah cukup membuat hariku terasa lebih indah. Aku nggak
+          butuh hari yang selalu sempurna, karena kehadiranmu saja sudah
+          bisa membuat hari biasa menjadi sesuatu yang istimewa.
+        </p>
+        <div class="card-footer">you make my ordinary days beautiful ♡</div>
       </article>
 
-      <article class="joke">
-        <span>🤏</span>
-        <h3 class="font-cinzel">Gemas & Menggemaskan</h3>
-        <p>Bahkan saat sedang ngambek pun kamu tetap menggemaskan. Bikin bingung antara mau bujuk atau senyum-senyum sendiri.</p>
+      <article class="putri-card">
+        <div class="card-top">
+          <span class="card-icon">🤏</span>
+          <span class="card-number">02 / MY LITTLE HAPPINESS</span>
+        </div>
+        <h3 class="font-cinzel">Si Paling Bikin Rindu</h3>
+        <p>
+          Kamu itu unik, Putri. Bisa bikin aku ketawa cuma karena hal
+          receh, bikin aku gemas karena tingkahmu, bahkan bikin aku
+          kangen padahal baru saja selesai ngobrol. Kadang aku sendiri
+          bingung, kok bisa ya satu orang punya banyak sekali cara
+          untuk membuatku jatuh cinta berkali-kali? Jawabannya ternyata
+          sederhana: karena orang itu kamu.
+        </p>
+        <div class="card-footer">my favorite little troublemaker ♡</div>
       </article>
 
-      <article class="joke">
-        <span>🫶</span>
-        <h3 class="font-cinzel">Tulus Menjadi Diri Sendiri</h3>
-        <p>Tak perlu berpura-pura sempurna. Aku mencintai caramu menjadi dirimu sendiri apa adanya.</p>
+      <article class="putri-card">
+        <div class="card-top">
+          <span class="card-icon">🫶</span>
+          <span class="card-number">03 / JUST BE YOURSELF</span>
+        </div>
+        <h3 class="font-cinzel">Tak Harus Sempurna</h3>
+        <p>
+          Putri, kamu nggak harus selalu terlihat kuat, selalu tersenyum,
+          atau selalu tahu bagaimana menghadapi semuanya. Di mataku,
+          kamu tetap berharga bahkan di hari-hari ketika kamu merasa
+          sedang tidak baik-baik saja. Aku ingin mengenal semua sisi
+          dirimu, bukan hanya sisi yang indah untuk dilihat.
+        </p>
+        <div class="card-footer">you are enough, just as you are ♡</div>
       </article>
 
-      <article class="joke">
-        <span>🌻</span>
-        <h3 class="font-cinzel">Rumah Terbaikku</h3>
-        <p>Bersamamu terasa tenang. Tempat paling nyaman untuk pulang dan berbagi semua kisah hidup.</p>
+      <article class="putri-card">
+        <div class="card-top">
+          <span class="card-icon">🌻</span>
+          <span class="card-number">04 / MY PLACE TO COME HOME</span>
+        </div>
+        <h3 class="font-cinzel">Tempat Hatiku Pulang</h3>
+        <p>
+          Kalau suatu hari dunia terasa melelahkan buatmu, aku berharap
+          kamu ingat bahwa kamu nggak harus menghadapi semuanya sendirian.
+          Aku mungkin belum bisa menjadi seseorang yang selalu punya
+          jawaban untuk setiap masalahmu, tapi aku ingin terus belajar
+          menjadi seseorang yang mau mendengarkan dan menemanimu.
+        </p>
+        <div class="card-footer">wherever life goes, let's keep choosing us ♡</div>
       </article>
+    </div>
+
+    <div class="putri-closing">
+      <span class="closing-flower">🌼</span>
+      <p class="closing-label">ONE LAST THING, MY LOVE</p>
+      <h3 class="font-cinzel gold-text">Untukmu, Putri.</h3>
+      <p class="closing-message">
+        Aku nggak tahu akan ada berapa banyak cerita yang menunggu
+        kita di depan sana. Mungkin akan ada tawa yang nggak ada
+        habisnya, hari-hari yang melelahkan, perbedaan pendapat,
+        atau hal-hal yang belum pernah kita bayangkan sebelumnya.
+        <br /><br />
+        Tapi satu hal yang ingin aku usahakan adalah tetap mengenalmu,
+        bahkan ketika kita berubah seiring waktu. Tetap mendengarkanmu,
+        bahkan ketika kita sulit memahami satu sama lain.
+        <br /><br />
+        <strong style="color: var(--accent-gold);">
+          Terima kasih sudah hadir di hidupku, Putri.
+          Kalau mencintaimu adalah sebuah perjalanan,
+          aku ingin menikmati setiap langkahnya bersamamu. ♡
+        </strong>
+      </p>
+      <div class="closing-signature">With all my love, always ♡</div>
     </div>
   </section>
 
@@ -630,12 +835,12 @@ footer p {
     <button class="primary-btn" id="surprise-btn">Buka Kejutan Terakhir 💝</button>
 
     <div id="surprise-message" aria-live="polite">
-      <h2 class="font-script gold-text" style="font-size: 48px; margin-bottom: 12px;">For You, My Love</h2>
-      <p>
+      <h2 class="font-script gold-text" style="font-size: 52px; margin-bottom: 12px;">For You, My Love</h2>
+      <p style="font-size: 1.1rem; color: var(--text-secondary);">
         Selamat ulang tahun sekali lagi, sayangku. Semoga hari ini dan hari-hari mendatang senantiasa dipenuhi tawa hangat, kebahagiaan sejati, dan cinta yang tak pernah usai.
       </p>
       <br>
-      <p style="color: var(--accent-gold); font-weight: 600;">
+      <p style="color: var(--accent-gold); font-weight: 600; font-size: 1.15rem;">
         Terima kasih telah mewarnai takdirku. I love you endlessly. ❤️
       </p>
     </div>
@@ -662,9 +867,22 @@ const music = document.getElementById('bg-music');
 const musicBtn = document.getElementById('music-btn');
 let petalsStarted = false;
 
+// Trigger Confetti Effect
+function triggerConfetti() {
+  if (typeof confetti === 'function') {
+    confetti({
+      particleCount: 80,
+      spread: 70,
+      origin: { y: 0.6 },
+      colors: ['#ffe8a3', '#d4af37', '#e8a598', '#ffffff']
+    });
+  }
+}
+
 document.getElementById('open-btn').addEventListener('click', async () => {
   intro.classList.add('hidden');
   startPetals();
+  triggerConfetti();
 
   try {
     await music.play();
@@ -724,6 +942,7 @@ document.getElementById('surprise-btn').addEventListener('click', () => {
 
   if (isOpen) {
     message.scrollIntoView({behavior:'smooth', block:'center'});
+    triggerConfetti();
     startPetals();
   }
 });
@@ -733,11 +952,11 @@ function startPetals() {
   petalsStarted = true;
 
   const container = document.getElementById('petals');
-  const symbols = ['✨', '🌸', '❤️', '🌹'];
+  const symbols = ['✨', '🌸', '❤️', '🌹', '✦'];
   let count = 0;
 
   const interval = setInterval(() => {
-    if (count >= 30) {
+    if (count >= 35) {
       clearInterval(interval);
       return;
     }
@@ -746,13 +965,13 @@ function startPetals() {
     petal.className = 'petal';
     petal.textContent = symbols[Math.floor(Math.random() * symbols.length)];
     petal.style.left = Math.random() * 100 + 'vw';
-    petal.style.animationDuration = (5 + Math.random() * 5) + 's';
-    petal.style.fontSize = (12 + Math.random() * 10) + 'px';
+    petal.style.animationDuration = (6 + Math.random() * 5) + 's';
+    petal.style.fontSize = (12 + Math.random() * 12) + 'px';
     container.appendChild(petal);
 
     petal.addEventListener('animationend', () => petal.remove());
     count++;
-  }, 400);
+  }, 350);
 }
 </script>
 </body>
